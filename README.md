@@ -90,8 +90,16 @@ Setting up the project is straightforward:
    ```
 
 ## Screenshots and Demo
+![Screenshot 2024-09-18 000605](https://github.com/user-attachments/assets/898d9703-b3ca-4cd1-85b0-2dc36c511c21)
+![Screenshot 2024-09-18 001302](https://github.com/user-attachments/assets/e707a202-be7d-49f2-9448-0791bbed87cd)
+![Screenshot 2024-09-18 000624](https://github.com/user-attachments/assets/f75c53fc-dcbe-4cff-9b4d-7c89a52ceac2)
+![Screenshot 2024-09-18 000804](https://github.com/user-attachments/assets/44609631-3b9f-4887-ba66-7e74362840da)
+![Screenshot 2024-09-18 000847](https://github.com/user-attachments/assets/042fc99b-6462-4664-b18e-f43b037ee958)
+![Screenshot 2024-09-18 002139](https://github.com/user-attachments/assets/437ba8c3-6fe1-4289-9743-3571484fd7fc)
+![Screenshot 2024-09-18 000859](https://github.com/user-attachments/assets/2190d515-ca3f-444b-b9fb-c6f5cc438deb)
+![Screenshot 2024-09-18 000938](https://github.com/user-attachments/assets/15d1931d-34b5-4b7a-8683-2af035905bce)
+![Screenshot 2024-09-18 001040](https://github.com/user-attachments/assets/b2083073-e880-495b-a6d4-2be70e5eacb8)
 
-(Add your screenshots and demo video here)
 
 ## Future Developments
 

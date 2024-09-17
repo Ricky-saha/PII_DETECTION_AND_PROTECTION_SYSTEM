@@ -86,7 +86,7 @@ Setting up the project is straightforward:
 
 4. In a new terminal, start the Python script:
    ```
-   python piii_web.py
+   python pii_web.py
    ```
 
 ## Screenshots and Demo

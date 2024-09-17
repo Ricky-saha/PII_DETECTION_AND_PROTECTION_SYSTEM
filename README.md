@@ -99,6 +99,9 @@ Setting up the project is straightforward:
 ![Screenshot 2024-09-18 000859](https://github.com/user-attachments/assets/2190d515-ca3f-444b-b9fb-c6f5cc438deb)
 ![Screenshot 2024-09-18 000938](https://github.com/user-attachments/assets/15d1931d-34b5-4b7a-8683-2af035905bce)
 ![Screenshot 2024-09-18 001040](https://github.com/user-attachments/assets/b2083073-e880-495b-a6d4-2be70e5eacb8)
+![Screenshot 2024-09-18 003040](https://github.com/user-attachments/assets/46619e23-ce7c-46c1-a0e6-d2978513be8d)
+![Screenshot 2024-09-18 003104](https://github.com/user-attachments/assets/37d96ad6-ce9c-4e91-bf1b-00bb68e56794)
+
 
 
 ## Future Developments

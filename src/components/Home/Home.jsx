@@ -286,7 +286,11 @@ const LandingPage = () => {
           <h1 className="text-5xl md:text-6xl font-bold mb-4 font-serif leading-tight">
             PII DETECTION AND PROTECTION SYSTEM
           </h1>
+<<<<<<< HEAD
           <h2 className="text-xl md:text-2xl mb-6 font-serif">BY INVINCIBLES</h2>
+=======
+          <h2 className="text-xl md:text-2xl mb-6 font-serif">BY PRIVACY SENTINELS</h2>
+>>>>>>> ed8ccaa91ab5e2b900a2d7c9aa7af1eec127109b
           <div className="w-24 h-1 bg-white mb-8"></div>
           <p className="mb-10 text-lg max-w-lg">Innovative solution for Detecting and safeguarding PII in Digital Documents</p>
           <motion.button 

@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 //---------------------------- Uploading to Cloudinary -------------------------------------------
+=======
+>>>>>>> ed8ccaa91ab5e2b900a2d7c9aa7af1eec127109b
 // import { uploadImageToCloudinary } from '../utils/imageUploader.js'; 
 // import User from '../models/User.js'; 
 // import Document from '../models/Document.js'
@@ -29,13 +32,17 @@
 //             });
 //         }
 
+<<<<<<< HEAD
 //         // Upload image to Cloudinary
+=======
+>>>>>>> ed8ccaa91ab5e2b900a2d7c9aa7af1eec127109b
 //         const uploadedDocument = await uploadImageToCloudinary(
 //             documentImage,
 //             process.env.FOLDER_NAME
 //         );
 //         console.log("Uploaded document:", uploadedDocument);
 
+<<<<<<< HEAD
         
 //         // Encrypt the document URL
 //         const secretkey = process.env.ENCRYPTION_SECRET;
@@ -44,6 +51,11 @@
 //         // Create a new Document with encrypted URL
 //         const newDocument = await Document.create({
 //             documentUrl: encryptedDocumentUrl,
+=======
+//         // Create a new Document
+//         const newDocument = await Document.create({
+//             documentUrl: uploadedDocument.secure_url,
+>>>>>>> ed8ccaa91ab5e2b900a2d7c9aa7af1eec127109b
 //         });
 
 //         // Add the document reference to the User
@@ -79,6 +91,7 @@
 //     }
 // };
 
+<<<<<<< HEAD
 
 //--------------------------------------------------------------------- upload to IPFS------------------------------------------------
 import User from "../models/User.js";
@@ -95,6 +108,22 @@ export const createDocument = async (req, res) => {
         if (!req.user || !req.user.id) {
             console.log("Auth error. Headers:", req.headers);
             console.log("Auth error. User:", req.user);
+=======
+import { uploadImageToCloudinary } from '../utils/imageUploader.js'; 
+import User from '../models/User.js'; 
+import Document from '../models/Document.js'
+import { encrypt } from '../utils/Hashing.js';
+
+//create Document
+export const createDocument = async (req, res) => {
+    try {
+        console.log('User from request:', req.user);
+        console.log('Files:', req.files);
+
+        if (!req.user || !req.user.id) {
+            console.log('Auth error. Headers:', req.headers);
+            console.log('Auth error. User:', req.user);
+>>>>>>> ed8ccaa91ab5e2b900a2d7c9aa7af1eec127109b
             return res.status(401).json({
                 success: false,
                 message: "Authentication required",
@@ -111,6 +140,7 @@ export const createDocument = async (req, res) => {
             });
         }
 
+<<<<<<< HEAD
         // Upload the document to IPFS
         const ipfsHash = await uploadToIPFS(documentImage);
         if (!ipfsHash) {
@@ -129,14 +159,41 @@ export const createDocument = async (req, res) => {
         // Create a new Document entry with encrypted IPFS hash
         const newDocument = await Document.create({
             documentUrl: encryptedCID,
+=======
+        // Upload image to Cloudinary
+        const uploadedDocument = await uploadImageToCloudinary(
+            documentImage,
+            process.env.FOLDER_NAME
+        );
+        console.log("Uploaded document:", uploadedDocument);
+
+        
+        // Encrypt the document URL
+        const secretkey = process.env.ENCRYPTION_SECRET;
+        const encryptedDocumentUrl = encrypt(uploadedDocument.secure_url,secretkey);
+
+        // Create a new Document with encrypted URL
+        const newDocument = await Document.create({
+            documentUrl: encryptedDocumentUrl,
+>>>>>>> ed8ccaa91ab5e2b900a2d7c9aa7af1eec127109b
         });
 
         // Add the document reference to the User
         const updatedUser = await User.findByIdAndUpdate(
             userId,
+<<<<<<< HEAD
             { $push: { documents: newDocument._id } },
             { new: true }
         ).populate("documents");
+=======
+            {
+                $push: {
+                    documents: newDocument._id
+                }
+            },
+            { new: true }
+        ).populate('documents');
+>>>>>>> ed8ccaa91ab5e2b900a2d7c9aa7af1eec127109b
 
         if (!updatedUser) {
             return res.status(404).json({
@@ -148,7 +205,11 @@ export const createDocument = async (req, res) => {
         res.status(200).json({
             success: true,
             data: newDocument,
+<<<<<<< HEAD
             message: "Document uploaded successfully to IPFS",
+=======
+            message: "Document Uploaded Successfully",
+>>>>>>> ed8ccaa91ab5e2b900a2d7c9aa7af1eec127109b
         });
     } catch (error) {
         console.error("Error in createDocument:", error);
@@ -158,4 +219,8 @@ export const createDocument = async (req, res) => {
             error: error.message,
         });
     }
+<<<<<<< HEAD
 };
+=======
+};
+>>>>>>> ed8ccaa91ab5e2b900a2d7c9aa7af1eec127109b

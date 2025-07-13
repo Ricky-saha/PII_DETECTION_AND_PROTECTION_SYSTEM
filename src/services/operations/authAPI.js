@@ -6,9 +6,15 @@ import { apiConnector } from "../apiConnector";
 import { setDashboardData, setError, setLoading as setAdminLoading } from '../../slices/adminSlice';
 
 
+<<<<<<< HEAD
 const { SIGNUP_API, LOGIN_API, VERIFY_OTP, UPLOAD_DOCUMENT_API,ADMIN_DASHBOARD } = endpoints;
 
 export function signUp(firstName, lastName, email, password, accountType, avatar, navigate) {
+=======
+const { SIGNUP_API, LOGIN_API, UPLOAD_DOCUMENT_API,ADMIN_DASHBOARD } = endpoints;
+
+export function signUp(firstName, lastName, email, password, avatar, navigate) {
+>>>>>>> ed8ccaa91ab5e2b900a2d7c9aa7af1eec127109b
   return async (dispatch) => {
     const toastId = toast.loading("Loading...");
     dispatch(setLoading(true));
@@ -18,8 +24,11 @@ export function signUp(firstName, lastName, email, password, accountType, avatar
       formData.append("lastName", lastName);
       formData.append("email", email);
       formData.append("password", password);
+<<<<<<< HEAD
       formData.append("accountType", accountType); // Adding role to the form data
       
+=======
+>>>>>>> ed8ccaa91ab5e2b900a2d7c9aa7af1eec127109b
       if (avatar) {
         formData.append("avatar", avatar, avatar.name);
       }
@@ -35,8 +44,11 @@ export function signUp(firstName, lastName, email, password, accountType, avatar
       }
 
       toast.success("Signup Successful");
+<<<<<<< HEAD
       
       // Redirect to login page
+=======
+>>>>>>> ed8ccaa91ab5e2b900a2d7c9aa7af1eec127109b
       navigate("/login");
     } catch (error) {
       console.error("SIGNUP API ERROR:", error);
@@ -48,6 +60,7 @@ export function signUp(firstName, lastName, email, password, accountType, avatar
   };
 }
 
+<<<<<<< HEAD
 export function sendLoginOtp(email, password, setOtpSent) {
   return async (dispatch) => {
     const toastId = toast.loading("Sending OTP...");
@@ -82,12 +95,20 @@ export function sendLoginOtp(email, password, setOtpSent) {
 export function login(email, password, otp,navigate, callback) {
   return async (dispatch) => {
     const toastId = toast.loading("Verifying...");
+=======
+export function login(email, password, navigate) {
+  return async (dispatch) => {
+    const toastId = toast.loading("Loading...");
+>>>>>>> ed8ccaa91ab5e2b900a2d7c9aa7af1eec127109b
     dispatch(setLoading(true));
     try {
       const response = await apiConnector("POST", LOGIN_API, {
         email,
         password,
+<<<<<<< HEAD
         otp
+=======
+>>>>>>> ed8ccaa91ab5e2b900a2d7c9aa7af1eec127109b
       });
 
       if (!response.success) {
@@ -96,6 +117,7 @@ export function login(email, password, otp,navigate, callback) {
 
       toast.success(response.message || "Login Successful");
       dispatch(setToken(response.token));
+<<<<<<< HEAD
       // navigate("/admin-dashboard")
 
       // Navigate based on user role
@@ -129,6 +151,19 @@ export function login(email, password, otp,navigate, callback) {
       if (typeof callback === 'function') {
         callback(false);
       }
+=======
+
+      const userImage = response.user.avatar || `https://api.dicebear.com/5.x/initials/svg?seed=${response.user.firstName} ${response.user.lastName}`;
+      dispatch(setUser({ ...response.user, image: userImage }));
+
+      localStorage.setItem("user", JSON.stringify(response.user));
+      localStorage.setItem("token", JSON.stringify(response.token));
+
+      navigate("/upload-documents");
+    } catch (error) {
+      console.error("LOGIN API ERROR:", error);
+      toast.error(error.response?.data?.message || "Login Failed");
+>>>>>>> ed8ccaa91ab5e2b900a2d7c9aa7af1eec127109b
     } finally {
       dispatch(setLoading(false));
       toast.dismiss(toastId);
@@ -239,6 +274,7 @@ export function fetchAdminDashboard() {
   };
 }
 
+<<<<<<< HEAD
 export function logout(navigate) {
   return (dispatch) => {
     dispatch(setToken(null))
@@ -249,6 +285,8 @@ export function logout(navigate) {
     navigate("/")
   }
 }
+=======
+>>>>>>> ed8ccaa91ab5e2b900a2d7c9aa7af1eec127109b
 // export function fetchAdminDashboard(page = 1, limit = 20, includeDocuments = false) {
 //   return async (dispatch) => {
 //     dispatch(setAdminLoading(true));

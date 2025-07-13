@@ -2,6 +2,7 @@ import {encrypt,decrypt} from "../utils/Hashing.js";
 import User from "../models/User.js";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+<<<<<<< HEAD
 import OTP from "../models/OTP.js";
 import otpGenerator from "otp-generator";
 import {uploadImageToCloudinary} from "../utils/imageUploader.js"
@@ -9,6 +10,10 @@ import crypto from "crypto"
 
 
 
+=======
+import {uploadImageToCloudinary} from "../utils/imageUploader.js"
+import crypto from "crypto"
+>>>>>>> ed8ccaa91ab5e2b900a2d7c9aa7af1eec127109b
 dotenv.config();
 const result = dotenv.config();
 if (result.error) {
@@ -20,9 +25,14 @@ if (result.error) {
 // Signup Controller for Registering Users
 const signup = async (req, res) => {
     try {
+<<<<<<< HEAD
         const { firstName, lastName, email, password, accountType } = req.body;
 
         // Validate required fields
+=======
+        const { firstName, lastName, email, password } = req.body;
+
+>>>>>>> ed8ccaa91ab5e2b900a2d7c9aa7af1eec127109b
         if (!firstName || !lastName || !email || !password) {
             return res.status(403).json({
                 success: false,
@@ -47,8 +57,11 @@ const signup = async (req, res) => {
                 message: "Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character",
             });
         }
+<<<<<<< HEAD
         
         // Generate email hash and check for existing user
+=======
+>>>>>>> ed8ccaa91ab5e2b900a2d7c9aa7af1eec127109b
         const emailHash = crypto.createHash('sha256').update(email).digest('hex');
         const existingUser = await User.findOne({ emailHash });
         if (existingUser) {
@@ -58,7 +71,10 @@ const signup = async (req, res) => {
             });
         }
 
+<<<<<<< HEAD
         // Check for avatar image
+=======
+>>>>>>> ed8ccaa91ab5e2b900a2d7c9aa7af1eec127109b
         const avatarLocalPath = req.files?.avatar;
         if (!avatarLocalPath) {
             return res.status(400).json({
@@ -67,7 +83,10 @@ const signup = async (req, res) => {
             });
         }
 
+<<<<<<< HEAD
         // Upload image to Cloudinary
+=======
+>>>>>>> ed8ccaa91ab5e2b900a2d7c9aa7af1eec127109b
         const avatar = await uploadImageToCloudinary(
             avatarLocalPath,
             process.env.FOLDER_NAME
@@ -80,12 +99,16 @@ const signup = async (req, res) => {
             });
         }
 
+<<<<<<< HEAD
         // Get encryption secret from environment variables
+=======
+>>>>>>> ed8ccaa91ab5e2b900a2d7c9aa7af1eec127109b
         const secret = process.env.ENCRYPTION_SECRET;
         if (!secret) {
             throw new Error('ENCRYPTION_SECRET is not set in environment variables');
         }
         
+<<<<<<< HEAD
         // Prepare data for user creation
         console.log("Creating user with email hash:", emailHash);
         
@@ -93,18 +116,26 @@ const signup = async (req, res) => {
         const normalizedRole = accountType ? (accountType.toLowerCase() === "admin" ? "Admin" : "User") : "User";
         
         // Encrypt user data
+=======
+        console.log(emailHash);
+>>>>>>> ed8ccaa91ab5e2b900a2d7c9aa7af1eec127109b
         const encryptedFirstName = encrypt(firstName, secret);
         const encryptedLastName = encrypt(lastName, secret);
         const encryptedEmail = encrypt(email, secret);
         const encryptedPassword = encrypt(password, secret);
         const encryptedAvatar = encrypt(avatar.url, secret);
+<<<<<<< HEAD
         const encryptedAccountType = encrypt(normalizedRole, secret);
 
         // Create user in database
+=======
+
+>>>>>>> ed8ccaa91ab5e2b900a2d7c9aa7af1eec127109b
         const user = await User.create({
             firstName: encryptedFirstName,
             lastName: encryptedLastName,
             email: encryptedEmail,
+<<<<<<< HEAD
             emailHash: emailHash,
             password: encryptedPassword,
             avatar: encryptedAvatar,
@@ -112,11 +143,19 @@ const signup = async (req, res) => {
         });
 
         // Return success response
+=======
+            emailHash:emailHash,
+            password: encryptedPassword,
+            avatar: encryptedAvatar
+        });
+
+>>>>>>> ed8ccaa91ab5e2b900a2d7c9aa7af1eec127109b
         return res.status(201).json({
             success: true,
             message: "User registered successfully",
             user: {
                 _id: user._id,
+<<<<<<< HEAD
                 firstName: decrypt(user.firstName, secret),
                 lastName: decrypt(user.lastName, secret),
                 email: decrypt(user.email, secret),
@@ -127,12 +166,25 @@ const signup = async (req, res) => {
         });
     } catch (error) {
         console.error("Signup error:", error);
+=======
+                firstName: user.firstName,
+                lastName: user.lastName,
+                email: user.email,
+                emailHash:emailHash,
+                avatar: user.avatar,
+            },
+            
+        });
+    } catch (error) {
+        console.error(error);
+>>>>>>> ed8ccaa91ab5e2b900a2d7c9aa7af1eec127109b
         return res.status(500).json({
             success: false,
             message: "User cannot be registered. Please try again.",
         });
     }
 };
+<<<<<<< HEAD
 
 
 // Login Controller for Registered Users with OTP verification
@@ -145,10 +197,22 @@ const login = async (req, res) => {
             return res.status(400).json({
                 success: false,
                 message: "Please fill up all the required fields (email, password, and OTP)",
+=======
+// login Controller for Registered Users
+const login = async (req, res) => {
+    try {
+        const { email, password } = req.body;
+
+        if (!email || !password) {
+            return res.status(400).json({
+                success: false,
+                message: "Please fill up all the required fields",
+>>>>>>> ed8ccaa91ab5e2b900a2d7c9aa7af1eec127109b
             });
         }
 
         const secret = process.env.ENCRYPTION_SECRET;
+<<<<<<< HEAD
         // Create email hash for database lookup
         const emailHash = crypto.createHash('sha256').update(email).digest('hex');
         console.log("Login attempt for:", emailHash);
@@ -156,22 +220,36 @@ const login = async (req, res) => {
         // Find user by email hash
         const user = await User.findOne({ emailHash: emailHash });
         
+=======
+        // const encryptedEmail = encrypt(email, secret);
+        const emailHash = crypto.createHash('sha256').update(email).digest('hex');
+        console.log("login", emailHash);
+        const user = await User.findOne({ emailHash: emailHash });
+
+>>>>>>> ed8ccaa91ab5e2b900a2d7c9aa7af1eec127109b
         if (!user) {
             return res.status(401).json({
                 success: false,
                 message: "User is not registered with us. Please sign up to continue.",
             });
         }
+<<<<<<< HEAD
         
         // Verify password
         const decryptedPassword = decrypt(user.password, secret);
         
+=======
+
+        const decryptedPassword = decrypt(user.password, secret);
+
+>>>>>>> ed8ccaa91ab5e2b900a2d7c9aa7af1eec127109b
         if (password !== decryptedPassword) {
             return res.status(401).json({
                 success: false,
                 message: "Invalid credentials",
             });
         }
+<<<<<<< HEAD
 
         // Find the most recent OTP for the email
         const response = await OTP.find({ email }).sort({ createdAt: -1 }).limit(1);
@@ -202,22 +280,39 @@ const login = async (req, res) => {
         // Generate JWT token
         const token = jwt.sign(
             { email: decryptedEmail, id: user._id, role: userRole },
+=======
+        const decryptedEmail= decrypt(user.email, secret)
+        const token = jwt.sign(
+            { email:decryptedEmail, id: user._id },
+>>>>>>> ed8ccaa91ab5e2b900a2d7c9aa7af1eec127109b
             process.env.JWT_SECRET,
             { expiresIn: "24h" },
         );
         
+<<<<<<< HEAD
         // Update user with token
         await User.findByIdAndUpdate(user._id, { token: token });
         
         // Set cookie options
         const options = {
             expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000), // 3 days
+=======
+        user.token = token;
+        user.password = undefined;
+
+        const options = {
+            expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
+>>>>>>> ed8ccaa91ab5e2b900a2d7c9aa7af1eec127109b
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
             sameSite: 'strict'
         };
+<<<<<<< HEAD
         
         // Send successful response with token and user data
+=======
+
+>>>>>>> ed8ccaa91ab5e2b900a2d7c9aa7af1eec127109b
         res.cookie("token", token, options).status(200).json({
             success: true,
             token,
@@ -225,14 +320,23 @@ const login = async (req, res) => {
                 _id: user._id,
                 firstName: decrypt(user.firstName, secret),
                 lastName: decrypt(user.lastName, secret),
+<<<<<<< HEAD
                 email: decryptedEmail,
                 avatar: decrypt(user.avatar, secret),
                 role: userRole // Using converted role format for frontend
+=======
+                email: decrypt(user.email, secret),
+                avatar: decrypt(user.avatar, secret)
+>>>>>>> ed8ccaa91ab5e2b900a2d7c9aa7af1eec127109b
             },
             message: "User login successful",
         });
     } catch (error) {
+<<<<<<< HEAD
         console.error("Login error:", error);
+=======
+        console.error(error);
+>>>>>>> ed8ccaa91ab5e2b900a2d7c9aa7af1eec127109b
         return res.status(500).json({
             success: false,
             message: "Login failure. Please try again.",
@@ -240,6 +344,7 @@ const login = async (req, res) => {
     }
 };
 
+<<<<<<< HEAD
 
 
 // Send OTP specifically for login verification
@@ -335,3 +440,6 @@ const sendOtp = async (req, res) => {
 
 
 export { signup, login, sendOtp };
+=======
+export { signup, login };
+>>>>>>> ed8ccaa91ab5e2b900a2d7c9aa7af1eec127109b

@@ -1,3 +1,130 @@
+<<<<<<< HEAD
+=======
+// import React, { useState } from "react";
+// import "./signup.css";
+// import { Link, useNavigate } from "react-router-dom";
+// import { useDispatch } from "react-redux";
+// import { signUp } from "../../services/operations/authAPI";
+
+// const Signup = () => {
+//   const navigate = useNavigate();
+//   const dispatch = useDispatch();
+
+//   const [formData, setFormData] = useState({
+//     firstName: "",
+//     lastName: "",
+//     email: "",
+//     password: "",
+//     avatar: null,
+//   });
+
+//   const { firstName, lastName, email, password, avatar } = formData;
+
+//   const handleOnChange = (e) => {
+//     setFormData((prevData) => ({
+//       ...prevData,
+//       [e.target.name]: e.target.value,
+//     }));
+//   };
+
+//   const handleFileChange = (e) => {
+//     const file = e.target.files[0];
+//     setFormData((prevData) => ({
+//       ...prevData,
+//       avatar: file,
+//     }));
+//   };
+
+//   const handleOnSubmit = (e) => {
+//     e.preventDefault();
+
+//     dispatch(signUp(firstName, lastName, email, password, avatar, navigate));
+
+//     // Reset form
+//     setFormData({
+//       firstName: "",
+//       lastName: "",
+//       email: "",
+//       password: "",
+//       avatar: null,
+//     });
+//   };
+
+//   return (
+//     <div className="addUser">
+//       <h3>Sign Up</h3>
+//       <form className="addUserForm" onSubmit={handleOnSubmit}>
+//         <div className="inputGroup">
+//           <label htmlFor="firstName">First Name:</label>
+//           <input
+//             type="text"
+//             id="firstName"
+//             name="firstName"
+//             value={firstName}
+//             onChange={handleOnChange}
+//             autoComplete="off"
+//             placeholder="Enter your first name"
+//             required
+//           />
+//           <label htmlFor="lastName">Last Name:</label>
+//           <input
+//             type="text"
+//             id="lastName"
+//             name="lastName"
+//             value={lastName}
+//             onChange={handleOnChange}
+//             autoComplete="off"
+//             placeholder="Enter your last name"
+//             required
+//           />
+//           <label htmlFor="email">Email:</label>
+//           <input
+//             type="email"
+//             id="email"
+//             name="email"
+//             value={email}
+//             onChange={handleOnChange}
+//             autoComplete="off"
+//             placeholder="Enter your Email"
+//             required
+//           />
+//           <label htmlFor="password">Password:</label>
+//           <input
+//             type="password"
+//             id="password"
+//             name="password"
+//             value={password}
+//             onChange={handleOnChange}
+//             autoComplete="off"
+//             placeholder="Enter Password"
+//             required
+//           />
+//           <label htmlFor="avatar">Avatar:</label>
+//           <input
+//             type="file"
+//             id="avatar"
+//             name="avatar"
+//             onChange={handleFileChange}
+//             accept="image/*"
+//           />
+//           <button type="submit" className="btn btn-primary">
+//             Sign Up
+//           </button>
+//         </div>
+//       </form>
+//       <div className="login">
+//         <p>Already have an Account? </p>
+//         <Link to="/login" className="btn btn-primary">
+//           Login
+//         </Link>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default Signup;
+
+>>>>>>> ed8ccaa91ab5e2b900a2d7c9aa7af1eec127109b
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -13,11 +140,18 @@ const Signup = () => {
     lastName: "",
     email: "",
     password: "",
+<<<<<<< HEAD
     role: "user", // Default role is user
     avatar: null,
   });
 
   const { firstName, lastName, email, password, role, avatar } = formData;
+=======
+    avatar: null,
+  });
+
+  const { firstName, lastName, email, password, avatar } = formData;
+>>>>>>> ed8ccaa91ab5e2b900a2d7c9aa7af1eec127109b
 
   const handleOnChange = (e) => {
     setFormData((prevData) => ({
@@ -36,13 +170,20 @@ const Signup = () => {
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
+<<<<<<< HEAD
     dispatch(signUp(firstName, lastName, email, password, role, avatar, navigate));
+=======
+    dispatch(signUp(firstName, lastName, email, password, avatar, navigate));
+>>>>>>> ed8ccaa91ab5e2b900a2d7c9aa7af1eec127109b
     setFormData({
       firstName: "",
       lastName: "",
       email: "",
       password: "",
+<<<<<<< HEAD
       role: "user",
+=======
+>>>>>>> ed8ccaa91ab5e2b900a2d7c9aa7af1eec127109b
       avatar: null,
     });
   };
@@ -129,6 +270,7 @@ const Signup = () => {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
+<<<<<<< HEAD
                   <label htmlFor="role" className="block text-sm font-medium text-gray-700 mb-1">
                     Select Role
                   </label>
@@ -152,6 +294,8 @@ const Signup = () => {
                   <label htmlFor="avatar" className="block text-sm font-medium text-gray-700 mb-1">
                     Profile Image
                   </label>
+=======
+>>>>>>> ed8ccaa91ab5e2b900a2d7c9aa7af1eec127109b
                   <input
                     type="file"
                     id="avatar"
@@ -159,7 +303,10 @@ const Signup = () => {
                     onChange={handleFileChange}
                     accept="image/*"
                     className="w-full px-4 py-3 rounded-lg bg-gray-100 border-2 border-gray-200 focus:border-indigo-500 focus:bg-white focus:outline-none transition duration-200 ease-in-out"
+<<<<<<< HEAD
                     required
+=======
+>>>>>>> ed8ccaa91ab5e2b900a2d7c9aa7af1eec127109b
                   />
                 </motion.div>
               </div>

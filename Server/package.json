@@ -12,14 +12,18 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+<<<<<<< HEAD
     "axios": "^1.8.1",
     "bcrpyt": "^2.0.0",
+=======
+>>>>>>> ed8ccaa91ab5e2b900a2d7c9aa7af1eec127109b
     "bcrypt": "^5.1.1",
     "cloudinary": "^2.4.0",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "crypto": "^1.0.1",
     "crypto-js": "^4.2.0",
+<<<<<<< HEAD
     "dotenv": "^16.4.7",
     "express": "^4.19.2",
     "express-fileupload": "^1.5.1",
@@ -31,6 +35,14 @@
     "nodemon": "^3.1.4",
     "otp-generator": "^4.0.1",
     "snarkyjs": "^0.12.1"
+=======
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-fileupload": "^1.5.1",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.5.3",
+    "nodemon": "^3.1.4"
+>>>>>>> ed8ccaa91ab5e2b900a2d7c9aa7af1eec127109b
   },
   "devDependencies": {
     "@types/node": "^22.5.0"

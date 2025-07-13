@@ -53,7 +53,11 @@ def upload_file():
 
         if results:
             return jsonify(results)
+<<<<<<< HEAD
             # print(results)
+=======
+            print(results)
+>>>>>>> ed8ccaa91ab5e2b900a2d7c9aa7af1eec127109b
         else:
             return jsonify({'No PII detected. Please upload a properly scanned image.'})
 

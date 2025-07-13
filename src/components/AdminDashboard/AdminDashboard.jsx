@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 
 // import React, { useEffect, useState } from 'react';
@@ -6,22 +7,36 @@
 // import { motion } from 'framer-motion';
 // import { FiEdit2, FiTrash2, FiEye, FiUserPlus, FiAlertCircle, FiX } from 'react-icons/fi';
 // import logo from '../../Images/logo.png';
+=======
+// import React, { useEffect, useState } from 'react';
+// import { useDispatch, useSelector } from 'react-redux';
+// import { fetchAdminDashboard } from '../../services/operations/authAPI';
+// import './AdminDashboard.css';
+// import logo from '../../Images/logo.png'
+>>>>>>> ed8ccaa91ab5e2b900a2d7c9aa7af1eec127109b
 
 // const AdminDashboard = () => {
 //   const dispatch = useDispatch();
 //   const { dashboardData, loading, error } = useSelector(state => state.admin);
 //   const [localError, setLocalError] = useState(null);
 //   const [selectedDocument, setSelectedDocument] = useState(null);
+<<<<<<< HEAD
 //   const [retryCount, setRetryCount] = useState(0);
+=======
+>>>>>>> ed8ccaa91ab5e2b900a2d7c9aa7af1eec127109b
 
 //   useEffect(() => {
 //     const loadDashboard = async () => {
 //       try {
+<<<<<<< HEAD
 //         setLocalError(null);
+=======
+>>>>>>> ed8ccaa91ab5e2b900a2d7c9aa7af1eec127109b
 //         await dispatch(fetchAdminDashboard());
 //       } catch (error) {
 //         console.error("Failed to load admin dashboard:", error);
 //         setLocalError(error.message || "Failed to load dashboard. Please try again later.");
+<<<<<<< HEAD
 //         if (retryCount < 3) {
 //           setTimeout(() => {
 //             setRetryCount(prev => prev + 1);
@@ -31,6 +46,16 @@
 //     };
 //     loadDashboard();
 //   }, [dispatch, retryCount]);
+=======
+//       }
+//     };
+//     loadDashboard();
+//   }, [dispatch]);
+
+//   if (loading) return <div className="loading">Loading...</div>;
+//   if (error || localError) return <div className="error">Error: {error || localError}</div>;
+//   if (!dashboardData || dashboardData.length === 0) return <div className="no-data">No users found</div>;
+>>>>>>> ed8ccaa91ab5e2b900a2d7c9aa7af1eec127109b
 
 //   const openDocumentModal = (documentUrl) => {
 //     setSelectedDocument(documentUrl);
@@ -40,6 +65,7 @@
 //     setSelectedDocument(null);
 //   };
 
+<<<<<<< HEAD
 //   if (loading) return (
 //     <div className="flex items-center justify-center h-screen bg-gradient-to-r from-purple-200 via-pink-100 to-indigo-200">
 //       <div className="text-2xl font-bold text-gray-700">Loading...</div>
@@ -162,6 +188,68 @@
 //               </button>
 //             </div>
 //             <img src={selectedDocument} alt="Document Preview" className="w-full h-auto" />
+=======
+//   return (
+//     <div className="admin-dashboard">
+//       <div className="dashboard-header">
+//       <div className="logo-container">
+//         <img src={logo} alt="logo" className="logo" />
+//         <h1>SecureShield</h1>
+//       </div>
+//         {/* <button className="sign-in-btn">Sign in</button> */}
+//       </div>
+//       <div className="users-section">
+//         <h2>Users</h2>
+//         <button className="add-btn">+ Add</button>
+//       </div>
+//       <div className="table-container">
+//         <table className="user-table">
+//           <thead>
+//             <tr>
+//               <th>Avatar</th>
+//               <th>Name</th>
+//               <th>Email</th>
+//               <th>Documents</th>
+//               <th>Action</th>
+//             </tr>
+//           </thead>
+//           <tbody>
+//             {dashboardData.map(user => (
+//               <tr key={user._id}>
+//                 <td>
+//                   <img 
+//                     src={user.avatar || '/path-to-default-avatar.png'} 
+//                     alt={`${user.firstName} ${user.lastName}`} 
+//                     className="user-avatar" 
+//                   />
+//                 </td>
+//                 <td>{`${user.firstName} ${user.lastName}`}</td>
+//                 <td>{user.email}</td>
+//                 <td>
+//                   {user.documents.length > 0 ? (
+//                     <button 
+//                       className="view-doc-btn"
+//                       onClick={() => openDocumentModal(user.documents[0].documentUrl)}
+//                     >
+//                       View Document
+//                     </button>
+//                   ) : 'No documents'}
+//                 </td>
+//                 <td>
+//                   <button className="edit-btn">Edit</button>
+//                   <button className="delete-btn">Delete</button>
+//                 </td>
+//               </tr>
+//             ))}
+//           </tbody>
+//         </table>
+//       </div>
+//       {selectedDocument && (
+//         <div className="modal">
+//           <div className="modal-content">
+//             <span className="close" onClick={closeDocumentModal}>&times;</span>
+//             <img src={selectedDocument} alt="Document Preview" className="document-preview" />
+>>>>>>> ed8ccaa91ab5e2b900a2d7c9aa7af1eec127109b
 //           </div>
 //         </div>
 //       )}
@@ -171,9 +259,12 @@
 
 // export default AdminDashboard;
 
+<<<<<<< HEAD
 
 
 // -----------------------------------------------version with IPFS-------------------------
+=======
+>>>>>>> ed8ccaa91ab5e2b900a2d7c9aa7af1eec127109b
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAdminDashboard } from '../../services/operations/authAPI';
@@ -206,6 +297,7 @@ const AdminDashboard = () => {
     loadDashboard();
   }, [dispatch, retryCount]);
 
+<<<<<<< HEAD
   const formatIPFSUrl = (cid) => {
     // Remove any existing protocol or gateway prefix if present
     const cleanCid = cid.replace(/^ipfs:\/\/|^https?:\/\/[^/]+\/ipfs\//, '');
@@ -216,6 +308,10 @@ const AdminDashboard = () => {
     // Convert the documentUrl to an IPFS gateway URL
     const ipfsUrl = formatIPFSUrl(documentUrl);
     setSelectedDocument(ipfsUrl);
+=======
+  const openDocumentModal = (documentUrl) => {
+    setSelectedDocument(documentUrl);
+>>>>>>> ed8ccaa91ab5e2b900a2d7c9aa7af1eec127109b
   };
 
   const closeDocumentModal = () => {

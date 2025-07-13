@@ -67,25 +67,36 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+<<<<<<< HEAD
 import { login, sendLoginOtp } from "../../services/operations/authAPI";
+=======
+import { login } from "../../services/operations/authAPI";
+>>>>>>> ed8ccaa91ab5e2b900a2d7c9aa7af1eec127109b
 import { motion } from "framer-motion";
 
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+<<<<<<< HEAD
   const [otpSent, setOtpSent] = useState(false);
   const [otp, setOtp] = useState("");
+=======
+>>>>>>> ed8ccaa91ab5e2b900a2d7c9aa7af1eec127109b
 
   const [formData, setFormData] = useState({
     email: "",
     password: "",
+<<<<<<< HEAD
     role: "user" // Default role
+=======
+>>>>>>> ed8ccaa91ab5e2b900a2d7c9aa7af1eec127109b
   });
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+<<<<<<< HEAD
   const handleOtpChange = (e) => {
     setOtp(e.target.value);
   };
@@ -114,6 +125,11 @@ const Login = () => {
     }
     
     dispatch(login(formData.email, formData.password, otp, navigate));
+=======
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(login(formData.email, formData.password, navigate));
+>>>>>>> ed8ccaa91ab5e2b900a2d7c9aa7af1eec127109b
   };
 
   return (
@@ -127,6 +143,7 @@ const Login = () => {
         <div className="bg-white rounded-lg shadow-xl overflow-hidden">
           <div className="p-8">
             <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">Sign In</h2>
+<<<<<<< HEAD
             
             {!otpSent ? (
               // Step 1: Email, Password, and Role Form
@@ -261,6 +278,53 @@ const Login = () => {
             )}
           </div>
           
+=======
+            <form onSubmit={handleSubmit}>
+              <div className="space-y-6">
+                <motion.div
+                  className="relative"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 rounded-lg bg-gray-100 border-2 border-gray-200 focus:border-indigo-500 focus:bg-white focus:outline-none transition duration-200 ease-in-out"
+                    placeholder="Email Address"
+                    required
+                  />
+                </motion.div>
+                <motion.div
+                  className="relative"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    value={formData.password}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 rounded-lg bg-gray-100 border-2 border-gray-200 focus:border-indigo-500 focus:bg-white focus:outline-none transition duration-200 ease-in-out"
+                    placeholder="Password"
+                    required
+                  />
+                </motion.div>
+              </div>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                type="submit"
+                className="w-full bg-gradient-to-r from-purple-500 to-indigo-600 text-white font-bold py-3 px-4 rounded-lg mt-6 hover:from-purple-600 hover:to-indigo-700 transition duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-lg"
+              >
+                Login
+              </motion.button>
+            </form>
+          </div>
+>>>>>>> ed8ccaa91ab5e2b900a2d7c9aa7af1eec127109b
           <div className="px-8 py-4 bg-gray-50 border-t border-gray-100">
             <p className="text-center text-gray-600">
               Don't have an account?{" "}

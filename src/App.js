@@ -7,17 +7,14 @@ import AdminDashboard from "./Pages/Admin/dashboard";
 import Home from "./Pages/Home";
 import "./App.css";
 import PreviewDocument from "./Pages/PreviewDocument";
-<<<<<<< HEAD
 import AdminPanel from "./components/AdminPanel/AdminPanel";
 import RequestPanel from "./components/RequestPanel/RequestPanel";
-=======
->>>>>>> ed8ccaa91ab5e2b900a2d7c9aa7af1eec127109b
 
 function App() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Home />
+      element: <Home />,
     },
     {
       path: "/signup",
@@ -37,18 +34,15 @@ function App() {
     },
     {
       path: "/preview-document",
-      element: <PreviewDocument/>,
-<<<<<<< HEAD
-    },  
+      element: <PreviewDocument />,
+    },
     {
       path: "/admin-panel",
-      element: <AdminPanel/>,
+      element: <AdminPanel />,
     },
     {
       path: "/request-panel",
-      element: <RequestPanel/>,
-=======
->>>>>>> ed8ccaa91ab5e2b900a2d7c9aa7af1eec127109b
+      element: <RequestPanel />,
     },
   ]);
 

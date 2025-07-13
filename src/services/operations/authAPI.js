@@ -1,58 +1,62 @@
+/* ----------------------------------------------------------------
+   Imports & Constants
+---------------------------------------------------------------- */
 import { toast } from "react-hot-toast";
 import { setLoading, setToken } from "../../slices/authSlice";
 import { setUser } from "../../slices/profileSlice";
+import {
+  setDashboardData,
+  setError,
+  setLoading as setAdminLoading,
+} from "../../slices/adminSlice";
+
 import { endpoints } from "../apis";
 import { apiConnector } from "../apiConnector";
-import { setDashboardData, setError, setLoading as setAdminLoading } from '../../slices/adminSlice';
 
+const {
+  SIGNUP_API,
+  LOGIN_API,
+  VERIFY_OTP,
+  UPLOAD_DOCUMENT_API,
+  ADMIN_DASHBOARD,
+} = endpoints;
 
-<<<<<<< HEAD
-const { SIGNUP_API, LOGIN_API, VERIFY_OTP, UPLOAD_DOCUMENT_API,ADMIN_DASHBOARD } = endpoints;
-
-export function signUp(firstName, lastName, email, password, accountType, avatar, navigate) {
-=======
-const { SIGNUP_API, LOGIN_API, UPLOAD_DOCUMENT_API,ADMIN_DASHBOARD } = endpoints;
-
-export function signUp(firstName, lastName, email, password, avatar, navigate) {
->>>>>>> ed8ccaa91ab5e2b900a2d7c9aa7af1eec127109b
+/* ----------------------------------------------------------------
+   AUTH ‑ SIGN‑UP
+---------------------------------------------------------------- */
+export function signUp(
+  firstName,
+  lastName,
+  email,
+  password,
+  accountType, // "user" | "admin"
+  avatar,
+  navigate
+) {
   return async (dispatch) => {
-    const toastId = toast.loading("Loading...");
+    const toastId = toast.loading("Signing you up...");
     dispatch(setLoading(true));
+
     try {
       const formData = new FormData();
       formData.append("firstName", firstName);
       formData.append("lastName", lastName);
       formData.append("email", email);
       formData.append("password", password);
-<<<<<<< HEAD
-      formData.append("accountType", accountType); // Adding role to the form data
-      
-=======
->>>>>>> ed8ccaa91ab5e2b900a2d7c9aa7af1eec127109b
-      if (avatar) {
-        formData.append("avatar", avatar, avatar.name);
-      }
+      formData.append("accountType", accountType);
+      if (avatar) formData.append("avatar", avatar, avatar.name);
 
       const response = await apiConnector("POST", SIGNUP_API, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
+        headers: { "Content-Type": "multipart/form-data" },
       });
 
-      if (!response.success) {
-        throw new Error(response.message);
-      }
+      if (!response.success) throw new Error(response.message);
 
-      toast.success("Signup Successful");
-<<<<<<< HEAD
-      
-      // Redirect to login page
-=======
->>>>>>> ed8ccaa91ab5e2b900a2d7c9aa7af1eec127109b
+      toast.success("Signup successful");
       navigate("/login");
     } catch (error) {
       console.error("SIGNUP API ERROR:", error);
-      toast.error(error.response?.data?.message || "Signup Failed");
+      toast.error(error.response?.data?.message || "Signup failed");
     } finally {
       dispatch(setLoading(false));
       toast.dismiss(toastId);
@@ -60,27 +64,21 @@ export function signUp(firstName, lastName, email, password, avatar, navigate) {
   };
 }
 
-<<<<<<< HEAD
+/* ----------------------------------------------------------------
+   AUTH ‑ LOGIN (step 1 – send OTP)
+---------------------------------------------------------------- */
 export function sendLoginOtp(email, password, setOtpSent) {
   return async (dispatch) => {
     const toastId = toast.loading("Sending OTP...");
     dispatch(setLoading(true));
+
     try {
-      const response = await apiConnector("POST", VERIFY_OTP, {
-        email,
-        password
-      });
+      const response = await apiConnector("POST", VERIFY_OTP, { email, password });
+      if (!response.success) throw new Error(response.message);
 
-      if (!response.success) {
-        throw new Error(response.message);
-      }
-
-      toast.success("OTP sent successfully to your email");
-      if (setOtpSent) {
-        setOtpSent(true);
-      }
-      
-      return response.otp; // Return OTP for testing purposes (remove in production)
+      toast.success("OTP sent to your email");
+      if (setOtpSent) setOtpSent(true);
+      return response.otp; // for tests; remove in prod
     } catch (error) {
       console.error("SEND OTP API ERROR:", error);
       toast.error(error.response?.data?.message || "Failed to send OTP");
@@ -92,78 +90,49 @@ export function sendLoginOtp(email, password, setOtpSent) {
   };
 }
 
-export function login(email, password, otp,navigate, callback) {
+/* ----------------------------------------------------------------
+   AUTH ‑ LOGIN (step 2 – verify OTP & log in)
+---------------------------------------------------------------- */
+export function login(email, password, otp, navigate, callback) {
   return async (dispatch) => {
     const toastId = toast.loading("Verifying...");
-=======
-export function login(email, password, navigate) {
-  return async (dispatch) => {
-    const toastId = toast.loading("Loading...");
->>>>>>> ed8ccaa91ab5e2b900a2d7c9aa7af1eec127109b
     dispatch(setLoading(true));
+
     try {
       const response = await apiConnector("POST", LOGIN_API, {
         email,
         password,
-<<<<<<< HEAD
-        otp
-=======
->>>>>>> ed8ccaa91ab5e2b900a2d7c9aa7af1eec127109b
+        otp,
       });
 
-      if (!response.success) {
-        throw new Error(response.message);
-      }
+      if (!response.success) throw new Error(response.message);
 
-      toast.success(response.message || "Login Successful");
+      toast.success(response.message || "Login successful");
       dispatch(setToken(response.token));
-<<<<<<< HEAD
-      // navigate("/admin-dashboard")
 
-      // Navigate based on user role
-      if (response.user.role === 'admin') {
-        navigate("/admin-panel");
-      } else if (response.user.role === 'user') {
-        navigate("/upload-documents");
-      } else {
-        // Fallback navigation if role is unexpected
-        navigate("/admin-panel");
-      }
-      console.log(response.user.role);
+      /* -------- Store user & role -------- */
+      const userImage =
+        response.user.avatar ||
+        `https://api.dicebear.com/5.x/initials/svg?seed=${response.user.firstName} ${response.user.lastName}`;
 
-      const userImage = response.user.avatar || `https://api.dicebear.com/5.x/initials/svg?seed=${response.user.firstName} ${response.user.lastName}`;
-      // Save the role along with other user data
       const userData = { ...response.user, image: userImage };
       dispatch(setUser(userData));
 
       localStorage.setItem("user", JSON.stringify(userData));
       localStorage.setItem("token", JSON.stringify(response.token));
 
-      // Call the callback with success=true, user data, and include the role
-      if (typeof callback === 'function') {
-        callback(true, userData);
+      /* -------- Navigate by role -------- */
+      if (response.user.role === "admin") {
+        navigate("/admin-panel");
+      } else {
+        navigate("/upload-documents");
       }
+
+      if (typeof callback === "function") callback(true, userData);
     } catch (error) {
       console.error("LOGIN API ERROR:", error);
-      toast.error(error.response?.data?.message || "Login Failed");
-      
-      // Call the callback with success=false
-      if (typeof callback === 'function') {
-        callback(false);
-      }
-=======
-
-      const userImage = response.user.avatar || `https://api.dicebear.com/5.x/initials/svg?seed=${response.user.firstName} ${response.user.lastName}`;
-      dispatch(setUser({ ...response.user, image: userImage }));
-
-      localStorage.setItem("user", JSON.stringify(response.user));
-      localStorage.setItem("token", JSON.stringify(response.token));
-
-      navigate("/upload-documents");
-    } catch (error) {
-      console.error("LOGIN API ERROR:", error);
-      toast.error(error.response?.data?.message || "Login Failed");
->>>>>>> ed8ccaa91ab5e2b900a2d7c9aa7af1eec127109b
+      toast.error(error.response?.data?.message || "Login failed");
+      if (typeof callback === "function") callback(false);
     } finally {
       dispatch(setLoading(false));
       toast.dismiss(toastId);
@@ -171,11 +140,28 @@ export function login(email, password, navigate) {
   };
 }
 
+/* ----------------------------------------------------------------
+   AUTH ‑ LOGOUT
+---------------------------------------------------------------- */
+export function logout(navigate) {
+  return (dispatch) => {
+    dispatch(setToken(null));
+    dispatch(setUser(null));
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    toast.success("Logged out");
+    navigate("/");
+  };
+}
+
+/* ----------------------------------------------------------------
+   DOCUMENT UPLOAD (User)
+---------------------------------------------------------------- */
 export function uploadDocument(file) {
   return async (dispatch) => {
     const token = JSON.parse(localStorage.getItem("token"));
     if (!token) {
-      toast.error("You are not authenticated. Please log in.");
+      toast.error("Please log in first");
       return;
     }
 
@@ -188,24 +174,20 @@ export function uploadDocument(file) {
 
       const response = await apiConnector("POST", UPLOAD_DOCUMENT_API, formData, {
         Authorization: `Bearer ${token}`,
-        'Content-Type': 'multipart/form-data'
+        "Content-Type": "multipart/form-data",
       });
 
-      if (!response.success) {
-        throw new Error(response.message);
-      }
+      if (!response.success) throw new Error(response.message);
 
       toast.success("Document uploaded successfully");
     } catch (error) {
       console.error("UPLOAD DOCUMENT API ERROR:", error);
       if (error.response?.status === 401) {
-        toast.error("Unauthorized. Please log in again.");
-        // Optionally, redirect to login or perform additional actions here
-        dispatch(setToken(null)); // Clear the token
-        localStorage.removeItem("token"); // Remove token from localStorage
-        // You might want to redirect to login page here
+        toast.error("Session expired, please log in again");
+        dispatch(setToken(null));
+        localStorage.removeItem("token");
       } else {
-        toast.error(error.response?.data?.message || "Failed to upload document");
+        toast.error(error.response?.data?.message || "Upload failed");
       }
     } finally {
       dispatch(setLoading(false));
@@ -214,54 +196,32 @@ export function uploadDocument(file) {
   };
 }
 
+/* ----------------------------------------------------------------
+   ADMIN ‑ DASHBOARD
+---------------------------------------------------------------- */
 export function fetchAdminDashboard() {
   return async (dispatch) => {
     dispatch(setAdminLoading(true));
-    console.log("Starting admin dashboard fetch...");
+
     try {
       const token = localStorage.getItem("token");
-      if (!token) {
-        throw new Error("You are not authenticated. Please log in.");
-      }
+      if (!token) throw new Error("Please log in as admin");
 
-      console.log("Token retrieved, making API call...");
-      const timeoutPromise = new Promise((_, reject) =>
-        setTimeout(() => reject(new Error('Request timed out')), 60000)
+      const timeout = new Promise((_, reject) =>
+        setTimeout(() => reject(new Error("Request timed out")), 60000)
       );
-      const responsePromise = apiConnector("GET", ADMIN_DASHBOARD, null, {
-        Authorization: `Bearer ${token}`,
-      });
-      console.log("API call made, waiting for response...");
-      const response = await Promise.race([timeoutPromise, responsePromise]);
+      const response = await Promise.race([
+        apiConnector("GET", ADMIN_DASHBOARD, null, {
+          Authorization: `Bearer ${token}`,
+        }),
+        timeout,
+      ]);
 
-      console.log("Response received:", JSON.stringify(response, null, 2));
-
-      if (!response) {
-        throw new Error("No response received from the server");
-      }
-
-      let responseData = response;
-      
-      // If the response is a string, try to parse it as JSON
-      if (typeof response === 'string') {
-        try {
-          responseData = JSON.parse(response);
-        } catch (e) {
-          console.error("Failed to parse response as JSON:", e);
-          throw new Error("Invalid response format: not valid JSON");
-        }
-      }
-
-      console.log("Parsed response data:", responseData);
-      console.log("responseData.success:", responseData.success);
-      console.log("Array.isArray(responseData.data):", Array.isArray(responseData.data));
-
-      if (responseData.success && Array.isArray(responseData.data)) {
-        dispatch(setDashboardData(responseData.data));
-        console.log("Dashboard data successfully set");
+      const data = typeof response === "string" ? JSON.parse(response) : response;
+      if (data.success && Array.isArray(data.data)) {
+        dispatch(setDashboardData(data.data));
       } else {
-        console.error("Invalid response structure:", responseData);
-        throw new Error("Invalid response format: unexpected structure");
+        throw new Error("Unexpected response format");
       }
     } catch (error) {
       console.error("ADMIN DASHBOARD API ERROR:", error);
@@ -269,59 +229,6 @@ export function fetchAdminDashboard() {
       throw error;
     } finally {
       dispatch(setAdminLoading(false));
-      console.log("Admin dashboard fetch completed.");
     }
   };
 }
-
-<<<<<<< HEAD
-export function logout(navigate) {
-  return (dispatch) => {
-    dispatch(setToken(null))
-    dispatch(setUser(null))
-    localStorage.removeItem("token")
-    localStorage.removeItem("user")
-    toast.success("Logged Out")
-    navigate("/")
-  }
-}
-=======
->>>>>>> ed8ccaa91ab5e2b900a2d7c9aa7af1eec127109b
-// export function fetchAdminDashboard(page = 1, limit = 20, includeDocuments = false) {
-//   return async (dispatch) => {
-//     dispatch(setAdminLoading(true));
-//     console.log(`Starting admin dashboard fetch for page ${page}...`);
-//     try {
-//       const token = localStorage.getItem("token");
-//       if (!token) {
-//         throw new Error("You are not authenticated. Please log in.");
-//       }
-
-//       console.log("Token retrieved, making API call...");
-//       const url = `${ADMIN_DASHBOARD}?page=${page}&limit=${limit}&includeDocuments=${includeDocuments}`;
-//       const response = await apiConnector("GET", url, null, {
-//         Authorization: `Bearer ${token}`,
-//       });
-
-//       console.log("Response received:", JSON.stringify(response, null, 2));
-
-//       if (!response || !response.data) {
-//         throw new Error("Invalid response received from the server");
-//       }
-
-//       const { data, total, totalPages } = response.data;
-
-//       // dispatch(setDashboardData(data));
-//       // dispatch(setTotalUsers(total));
-//       // dispatch(setTotalPages(totalPages));
-//       console.log("Dashboard data successfully set");
-//     } catch (error) {
-//       console.error("ADMIN DASHBOARD API ERROR:", error);
-//       dispatch(setError(error.message));
-//       throw error;
-//     } finally {
-//       dispatch(setAdminLoading(false));
-//       console.log("Admin dashboard fetch completed.");
-//     }
-//   };
-// }

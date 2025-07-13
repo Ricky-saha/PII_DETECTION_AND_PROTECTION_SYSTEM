@@ -1,25 +1,22 @@
 import React from 'react';
-import logo from "../../../Images/logo.png"
-<<<<<<< HEAD
 import { useNavigate } from 'react-router-dom';
-const Navbar = () => {
+import logo from "../../../Images/logo.png";
 
-  const navigate = useNavigate();
-=======
 const Navbar = () => {
->>>>>>> ed8ccaa91ab5e2b900a2d7c9aa7af1eec127109b
+  const navigate = useNavigate();
+
   return (
     <nav className="flex items-center justify-between px-6 py-4 bg-white shadow-sm">
       {/* Logo */}
-      <div className="w-16 h-8 flex items-center">
-<<<<<<< HEAD
-        <img src={logo} alt="Government of India Logo" className="w-200px h-200px "
-        onClick={()=>navigate("/")} />
-=======
-        <img src={logo} alt="Government of India Logo" className="w-200px h-200px " />
->>>>>>> ed8ccaa91ab5e2b900a2d7c9aa7af1eec127109b
+      <div className="w-16 h-8 flex items-center cursor-pointer">
+        <img
+          src={logo}
+          alt="Government of India Logo"
+          className="w-[200px] h-[200px] object-contain"
+          onClick={() => navigate("/")}
+        />
       </div>
-      
+
       {/* Navigation Links */}
       <div className="flex space-x-8">
         <a href="#" className="text-gray-600 hover:text-gray-900">About us</a>
@@ -27,19 +24,14 @@ const Navbar = () => {
         <a href="#" className="text-gray-600 hover:text-gray-900">Case Studies</a>
         <a href="#" className="text-gray-600 hover:text-gray-900">How it Works</a>
       </div>
-      
+
       {/* Get Started Button */}
-<<<<<<< HEAD
-      <button className="px-4 py-2 text-white rounded-md hover:bg-purple-700 transition duration-300 bg-gradient-to-br from-[#6675F7] to-[#57007B]"
-       onClick={() => navigate("/signup")}>
+      <button
+        className="px-4 py-2 text-white rounded-md hover:bg-purple-700 transition duration-300 bg-gradient-to-br from-[#6675F7] to-[#57007B]"
+        onClick={() => navigate("/signup")}
+      >
         Get Started
       </button>
-      
-=======
-      <button className="px-4 py-2 text-white rounded-md hover:bg-purple-700 transition duration-300 bg-gradient-to-br from-[#6675F7] to-[#57007B]">
-        Get Started
-      </button>
->>>>>>> ed8ccaa91ab5e2b900a2d7c9aa7af1eec127109b
     </nav>
   );
 };

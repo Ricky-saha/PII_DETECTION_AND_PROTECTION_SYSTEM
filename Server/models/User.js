@@ -16,7 +16,7 @@ const userSchema = new mongoose.Schema({
         required: true,
         trim: true,
     },
-    emailHash:{
+    emailHash: {
         type: String,
         required: true,
     },
@@ -28,26 +28,23 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-<<<<<<< HEAD
-    accountType:{
-        type:String,
-        // enum:["Admin","User"],
-        // required:true,
+    accountType: {
+        type: String,
+        enum: ["Admin", "User"],
+        default: "User",
+        required: true,
     },
-=======
->>>>>>> ed8ccaa91ab5e2b900a2d7c9aa7af1eec127109b
     token: {
         type: String,
     },
-    documents:[
+    documents: [
         {
-            type:mongoose.Schema.Types.ObjectId,
-            ref:"Document",
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Document",
         }
     ],
-    
 });
 
-const User = mongoose.model('User', userSchema);
+const User = mongoose.model("User", userSchema);
 
-export default User;  
+export default User;

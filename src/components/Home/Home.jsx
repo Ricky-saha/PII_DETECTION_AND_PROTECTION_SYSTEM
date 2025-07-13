@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from 'swiper/modules';
-import { Shield, Eye, Files, Lock, Database, Key, Facebook, Twitter, Instagram, Linkedin, Mail, EyeOff, ArrowRight,MapPin } from 'lucide-react';
+import { Shield, Eye, Files, Lock, Database, Key, Facebook, Twitter, Instagram, Linkedin, Mail, EyeOff, ArrowRight, MapPin } from 'lucide-react';
 import { motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 
@@ -61,15 +61,15 @@ const LandingPage = () => {
       title: "Aadhaar Data Leak",
       description: "The data breach noticed by Resecurity mentioned that on October 9, a threat actor going by the alias 'pwn0001' posted a thread on Breach Forums brokering access to 815 million 'Indian Citizen Aadhaar and Passport' records",
       linkText: "Read full case study",
-      link:`https://economictimes.indiatimes.com/tech/technology/aadhar-data-leak-personal-data-of-81-5-crore-indians-on-sale-on-dark-web-report/articleshow/104856898.cms?from=mdr`
+      link: `https://economictimes.indiatimes.com/tech/technology/aadhar-data-leak-personal-data-of-81-5-crore-indians-on-sale-on-dark-web-report/articleshow/104856898.cms?from=mdr`
     },
     {
       image: image2,
       date: "JUNE 2023",
       title: "Cowin Data Leak",
-      description: " On June 12, reports emerged that a bot on the messaging platform Telegram was allegedly returning personal data of Indian citizens who registered with the COVID-19 vaccine intelligence network (CoWIN) portal for vaccination purposes. The bot spewed out personal details like name, Aadhaar and passport numbers upon entry of phone numbers.",
+      description: "On June 12, reports emerged that a bot on the messaging platform Telegram was allegedly returning personal data of Indian citizens who registered with the COVID-19 vaccine intelligence network (CoWIN) portal for vaccination purposes. The bot spewed out personal details like name, Aadhaar and passport numbers upon entry of phone numbers.",
       linkText: "Explore the incident",
-      link:`https://www.thehindu.com/sci-tech/technology/explained-what-does-the-alleged-cowin-data-leak-reveal/article66980831.ece`
+      link: `https://www.thehindu.com/sci-tech/technology/explained-what-does-the-alleged-cowin-data-leak-reveal/article66980831.ece`
     },
     {
       image: image3,
@@ -77,7 +77,7 @@ const LandingPage = () => {
       title: "Indian Telecom Data Breach",
       description: "The Department of Telecom has asked service operators for a security audit of their systems following claims by a cybersecurity firm that data of 750 million Indian subscribers has been leaked, a government official said. Cybersecurity firm CloudSEK has claimed that its researchers have found that hackers are selling 1.8 terabyte of a database comprising 750 million Indian mobile consumers on the dark web.",
       linkText: "Learn more",
-      link:`https://economictimes.indiatimes.com/industry/telecom/telecom-news/cybersecurity-co-claims-data-leak-of-750-mn-telecom-users-dot-asks-telcos-for-security-audit/articleshow/107239398.cms?from=mdr`
+      link: `https://economictimes.indiatimes.com/industry/telecom/telecom-news/cybersecurity-co-claims-data-leak-of-750-mn-telecom-users-dot-asks-telcos-for-security-audit/articleshow/107239398.cms?from=mdr`
     }
   ];
 
@@ -239,7 +239,7 @@ const LandingPage = () => {
   const sectionGradient = "bg-gradient-to-r from-purple-200 via-pink-100 to-indigo-200";
 
   // Component for Case Study
-  const CaseStudy = ({ image, date, title, description, linkText,link }) => {
+  const CaseStudy = ({ image, date, title, description, linkText, link }) => {
     const [ref, controls] = useScrollAnimation();
 
     return (
@@ -286,11 +286,7 @@ const LandingPage = () => {
           <h1 className="text-5xl md:text-6xl font-bold mb-4 font-serif leading-tight">
             PII DETECTION AND PROTECTION SYSTEM
           </h1>
-<<<<<<< HEAD
-          <h2 className="text-xl md:text-2xl mb-6 font-serif">BY INVINCIBLES</h2>
-=======
           <h2 className="text-xl md:text-2xl mb-6 font-serif">BY PRIVACY SENTINELS</h2>
->>>>>>> ed8ccaa91ab5e2b900a2d7c9aa7af1eec127109b
           <div className="w-24 h-1 bg-white mb-8"></div>
           <p className="mb-10 text-lg max-w-lg">Innovative solution for Detecting and safeguarding PII in Digital Documents</p>
           <motion.button 
@@ -318,7 +314,7 @@ const LandingPage = () => {
         initial="hidden"
         animate="visible"
         variants={fadeIn}
-        className={`pt-8  px-8 md:px-16 relative z-10 ${sectionGradient}`}
+        className={`pt-8 px-8 md:px-16 relative z-10 ${sectionGradient}`}
       >
         <h2 className="text-4xl font-semibold text-center mb-16 text-gray-800">Services we offer</h2>
         <Swiper
@@ -397,7 +393,7 @@ const LandingPage = () => {
         initial="hidden"
         animate="visible"
         variants={fadeIn}
-        className={`px-8 md:px-16  ${sectionGradient}`}
+        className={`px-8 md:px-16 ${sectionGradient}`}
       >
         <div className="container mx-auto flex flex-col">
           <h2 className="mb-16 text-center">
@@ -443,7 +439,7 @@ const LandingPage = () => {
         initial="hidden"
         animate="visible"
         variants={fadeIn}
-        className={`py-8 px-8 md:px-16  ${sectionGradient}`}
+        className={`py-8 px-8 md:px-16 ${sectionGradient}`}
       >
         <div className="max-w-6xl mx-auto">
           <h2 className="text-center mb-16">
@@ -502,7 +498,7 @@ const LandingPage = () => {
       >
         <h2 className="text-center mb-16">
           <span className="block text-3xl font-light text-gray-600">How development</span>
-          <span className="block text-5xl font-bold text-gray-800 mt-2">through Alcaline works</span>
+          <span className="block text-5xl font-bold text-gray-800 mt-2">through Privacy Sentinels works</span>
         </h2>
         <div className="relative">
           <div className="absolute inset-0 flex items-center justify-center">
